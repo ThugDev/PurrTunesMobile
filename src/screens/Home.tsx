@@ -1,9 +1,10 @@
+import React from 'react';
 import {Text, View} from 'react-native';
 
 const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
+    <View className=" bg-black">
+      <Text className="text-white text-2xl">Home123</Text>
     </View>
   );
 };
