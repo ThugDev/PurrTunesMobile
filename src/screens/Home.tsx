@@ -13,15 +13,6 @@ const Home = () => {
   // const [albums, setAlbums] = useState<AlbumType[]>([]);
   const navigation = useNavigation<HomeNavigationProps>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchPopularAlbums();
-      console.log(response, 'data');
-    };
-
-    fetchData();
-  });
-
   const {
     data: albums = [],
     isLoading,
