@@ -2,7 +2,6 @@ import React from 'react';
 import {Button, Image, Text, View} from 'react-native';
 import {useYouTubePlayer} from '../hooks/useYouTubePlayer';
 import {getVideoId} from '../utils/getVideoId';
-// import Config from 'react-native-config';
 import YouTubePlayer from 'react-native-youtube-iframe';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParmList} from '../../App';
@@ -26,12 +25,12 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
       />
       <Text className="text-2xl font-bold">{album.title}</Text>
       <Text className="text-xl text-#cccccc">{album.channelTitle}</Text>
-      {/* <YouTubePlayer
+      <YouTubePlayer
         videoId={videoId}
         height={250}
         play={isPlaying}
         onChangeState={handleStateChange}
-      /> */}
+      />
       <Button title={isPlaying ? 'Pause' : 'Play'} onPress={togglePlay} />
     </View>
   );

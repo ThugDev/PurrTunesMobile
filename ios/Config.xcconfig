@@ -1,8 +1,0 @@
-//
-//  Config.xcconfig
-//  PurrTunesMobile
-//
-//  Created by 김진솔 on 12/3/24.
-//
-
-#include? "tmp.xcconfig"
