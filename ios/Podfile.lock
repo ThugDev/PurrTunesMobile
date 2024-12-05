@@ -29,9 +29,6 @@ PODS:
     - FBLazyVector (= 0.76.3)
     - RCTRequired (= 0.76.3)
     - React-Core (= 0.76.3)
-  - RCTYouTube (2.0.2):
-    - React
-    - YoutubePlayer-in-WKWebView (~> 0.3.1)
   - React (0.76.3):
     - React-Core (= 0.76.3)
     - React-Core/DevSupport (= 0.76.3)
@@ -1380,7 +1377,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-webview (13.10.4):
+  - react-native-webview (13.12.5):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1736,7 +1733,6 @@ PODS:
     - Yoga
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
-  - YoutubePlayer-in-WKWebView (0.3.11)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
@@ -1750,7 +1746,6 @@ DEPENDENCIES:
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - RCTRequired (from `../node_modules/react-native/Libraries/Required`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
-  - RCTYouTube (from `../node_modules/react-native-youtube`)
   - React (from `../node_modules/react-native/`)
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
   - React-Core (from `../node_modules/react-native/`)
@@ -1815,7 +1810,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - SocketRocket
-    - YoutubePlayer-in-WKWebView
 
 EXTERNAL SOURCES:
   boost:
@@ -1839,8 +1833,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Required"
   RCTTypeSafety:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
-  RCTYouTube:
-    :path: "../node_modules/react-native-youtube"
   React:
     :path: "../node_modules/react-native/"
   React-callinvoker:
@@ -1971,7 +1963,6 @@ SPEC CHECKSUMS:
   RCTDeprecation: 2c5e1000b04ab70b53956aa498bf7442c3c6e497
   RCTRequired: 5f785a001cf68a551c5f5040fb4c415672dbb481
   RCTTypeSafety: 6b98db8965005d32449605c0d005ecb4fee8a0f7
-  RCTYouTube: a8bb45705622a6fc9decf64be04128d3658ed411
   React: 8077bf7c185afb515be82518507e16f71a247a5e
   React-callinvoker: 519eee9520727805e2867a6d8dad4ebbeed543db
   React-Core: e364ceda7d086c7d14adeec0eb880a90073e3dde
@@ -2000,7 +1991,7 @@ SPEC CHECKSUMS:
   react-native-config: 8f7283449bbb048902f4e764affbbf24504454af
   react-native-safe-area-context: 2500e4fe998caad50ad3bc51ec23ef951308569e
   react-native-video: 02120ed628f1ca8956b1e67e4e2ec8825e2f2710
-  react-native-webview: de26f4a2707d868213a85ac34bbfbb4b486cb1ce
+  react-native-webview: 40b8823be3fac70f0404016e6aed754ef4307517
   React-nativeconfig: aeed6e2a8ac02b2df54476afcc7c663416c12bf7
   React-NativeModulesApple: c5b7813da94136f50ef084fa1ac077332dcfc658
   React-perflogger: 6afb7eebf7d9521cc70481688ccddf212970e9d3
@@ -2032,8 +2023,7 @@ SPEC CHECKSUMS:
   RNScreens: 44a3e358d5ccd7815c5ae9148988c562826992b2
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 3deb2471faa9916c8a82dda2a22d3fba2620ad37
-  YoutubePlayer-in-WKWebView: 2c3aa1d5ad8dded9f95ef12033af5dd8e55864b7
 
-PODFILE CHECKSUM: 7c76dac51e05789eb70ac7b1874f94e0f9933878
+PODFILE CHECKSUM: df43bb16d10650b832c0f1db762806dfb41da266
 
 COCOAPODS: 1.16.2

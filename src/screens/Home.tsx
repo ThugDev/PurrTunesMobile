@@ -54,9 +54,6 @@ const Home = () => {
   return (
     <View className="flex-1 p-4">
       <Text className="text-xl font-bold mb-4">Popular Albums</Text>
-      {/* <View className="w-[200] h-[200] bg-black">
-        <Text className="text-white">Test</Text>
-      </View> */}
       <FlatList
         data={albums}
         renderItem={({item}) => (
