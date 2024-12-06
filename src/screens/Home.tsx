@@ -3,11 +3,8 @@ import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
 import {useNavigation} from '@react-navigation/native';
 import {fetchPopularAlbums} from '../apis/YoutubeAPI';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParmList} from '../../App';
 import {useQuery} from '@tanstack/react-query';
-
-type HomeNavigationProps = StackNavigationProp<RootStackParmList, 'Home'>;
+import {HomeNavigationProps} from './type';
 
 const Home = () => {
   // const [albums, setAlbums] = useState<AlbumType[]>([]);

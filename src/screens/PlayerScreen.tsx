@@ -3,14 +3,7 @@ import {Button, Image, Text, View} from 'react-native';
 import {useYouTubePlayer} from '../hooks/useYouTubePlayer';
 import {getVideoId} from '../utils/getVideoId';
 import YouTubePlayer from 'react-native-youtube-iframe';
-import {RouteProp} from '@react-navigation/native';
-import {RootStackParmList} from '../../App';
-
-type PlayerScreenRouteProp = RouteProp<RootStackParmList, 'PlayerScreen'>;
-
-interface PlayerScreenProps {
-  route: PlayerScreenRouteProp;
-}
+import {PlayerScreenProps} from './type';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
