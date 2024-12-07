@@ -1,9 +1,6 @@
 import axios from 'axios';
 import {AlbumType, YouTubeSearchResponse} from './type';
-// import Config from 'react-native-config';
-
-export const YOUTUBE_API_KEY = 'AIzaSyDdq36Gn7ztf_bvdx95pgbO3ziE48D8JKU';
-const YOUTUBE_URI = 'https://www.googleapis.com/youtube/v3/';
+import Config from 'react-native-config';
 
 /**
  * @function fetchPopularAlbums 유튜브 API에서 추천 앨범 목록을 가져오는 함수
@@ -15,13 +12,13 @@ export const fetchPopularAlbums = async (): Promise<AlbumType[]> => {
   const params = new URLSearchParams({
     part: 'snippet',
     chart: 'mostPopular',
-    key: YOUTUBE_API_KEY || '',
+    key: Config.YOUTUBE_API_KEY || '',
     type: 'video',
     videoCategoryId: '10', // 음악 카테고리 ID
     maxResults: '8',
   });
 
-  const response = await axios.get(`${YOUTUBE_URI}videos?${params}`);
+  const response = await axios.get(`${Config.YOUTUBE_URI}videos?${params}`);
 
   const {items = []}: YouTubeSearchResponse = response.data;
 
@@ -44,11 +41,11 @@ export const fetchPopularAlbums = async (): Promise<AlbumType[]> => {
  */
 export const fetchSuggestion = async (searchString: string) => {
   try {
-    const response = await axios.get(`${YOUTUBE_URI}search`, {
+    const response = await axios.get(`${Config.YOUTUBE_URI}search`, {
       params: {
         part: 'snippet',
         q: searchString,
-        key: YOUTUBE_API_KEY,
+        key: Config.YOUTUBE_API_KEY,
         type: 'video',
         videoCategoryId: '10',
         maxResults: '8',
@@ -77,11 +74,11 @@ export const fetchSearchResult = async (
   }
 
   try {
-    const response = await axios.get(`${YOUTUBE_URI}search`, {
+    const response = await axios.get(`${Config.YOUTUBE_URI}search`, {
       params: {
         part: 'snippet',
         q: query,
-        key: YOUTUBE_API_KEY || '',
+        key: Config.YOUTUBE_API_KEY || '',
         type: 'video',
         videoCategoryId: '10',
         maxResults: '20',
