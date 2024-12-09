@@ -1,22 +1,25 @@
 import React from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
-import {useNavigation} from '@react-navigation/native';
-import {fetchPopularAlbums} from '../apis/YoutubeAPI';
 import {useQuery} from '@tanstack/react-query';
+import {fetchSearchResult} from '../apis/YoutubeAPI';
+import {getVideoId} from '../utils/getVideoId';
 import {HomeNavigationProps} from './type';
-import AlbumSearch from '../components/AlbumSearch';
 
-const Home = () => {
+const SearchScreen = () => {
   const navigation = useNavigation<HomeNavigationProps>();
+  const route = useRoute();
+  const {query} = route.params as {query: string};
 
   const {
-    data: albums = [],
+    data: result = [],
     isLoading,
     isError,
   } = useQuery<AlbumType[], Error>({
-    queryKey: ['popularAlbums'],
-    queryFn: fetchPopularAlbums,
+    queryKey: ['searchReult', query],
+    queryFn: () => fetchSearchResult(query),
+    enabled: !!query,
   });
 
   const handlePress = (album: AlbumType) => {
@@ -26,7 +29,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center">
-        <Text>Loading...</Text>
+        <Text>로딩중......</Text>
       </View>
     );
   }
@@ -34,23 +37,22 @@ const Home = () => {
   if (isError) {
     return (
       <View className="flex-1 justify-center items-center">
-        <Text className="text-#ff0000">ERROR</Text>
+        <Text>애러가 발생했습니다.</Text>
       </View>
     );
   }
 
   return (
     <View className="flex-1 p-4">
-      <AlbumSearch />
-      <Text className="text-xl font-bold mb-4">Popular Albums</Text>
+      <Text className="text-xl font-bold mb-4">{query}</Text>
       <FlatList
-        data={albums}
+        data={result}
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => handlePress(item)} className="mb-4">
-            <View className="flex-row items-center">
+            <View className="flex-row">
               <Image
                 source={{uri: item.thumbnail.medium.url}}
-                className="w-20 h-20 mr-2.5"
+                className="w-20 h-20 mr-4"
               />
               <View>
                 <Text className="font-semibold">{item.title}</Text>
@@ -59,11 +61,11 @@ const Home = () => {
             </View>
           </TouchableOpacity>
         )}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => getVideoId(item.id)}
         contentContainerStyle={{flexGrow: 1}}
       />
     </View>
   );
 };
 
-export default Home;
+export default SearchScreen;
