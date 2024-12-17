@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {signSchema} from '../schema/SignSchema';
+import {postSignUp} from '../apis/signApi';
 
 const SignUpScreen = () => {
   const navigation = useNavigation<SignUpNavigationProps>();
@@ -18,13 +19,16 @@ const SignUpScreen = () => {
     resolver: zodResolver(signSchema),
   });
 
-  const onSubmit = (data: SignFormValues) => {
-    console.log(data);
-    navigation.navigate('SignInScreen');
+  const onSubmit = async (data: SignFormValues) => {
+    const response = await postSignUp(data);
+    if (response) {
+      navigation.navigate('SignInScreen');
+    }
+    console.log('signup response: ', response);
   };
 
   return (
-    <View className="flex justify-center items-center w-full h-screen">
+    <View className="flex mt-20 items-center w-full h-screen">
       <View className="flex justify-center items-center">
         <Text className="text-2xl font-bold">PurrTunesMobile</Text>
         <SignForm
