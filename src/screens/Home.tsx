@@ -6,12 +6,10 @@ import {fetchPopularAlbums} from '../apis/YoutubeAPI';
 import {useQuery} from '@tanstack/react-query';
 import {HomeNavigationProps} from './type';
 import AlbumSearch from '../components/AlbumSearch';
-import {useAlert} from '../components/common/AlertProvider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
-  const {showAlert} = useAlert();
   const {
     data: albums = [],
     isLoading,
@@ -24,6 +22,10 @@ const Home = () => {
   const handlePress = (album: AlbumType) => {
     navigation.navigate('PlayerScreen', {album});
   };
+
+  // const onLogout = async () => {
+  //   await AsyncStorage.removeItem('authToken');
+  // };
 
   if (isLoading) {
     return (
@@ -43,6 +45,9 @@ const Home = () => {
 
   return (
     <View className="flex-1 p-4 mt-10">
+      {/* <TouchableOpacity onPress={onLogout}>
+        <Text>로그아웃</Text>
+      </TouchableOpacity> */}
       <AlbumSearch />
       <Text className="text-xl font-bold mb-4">Popular Albums</Text>
       <FlatList
