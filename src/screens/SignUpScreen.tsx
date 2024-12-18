@@ -7,9 +7,12 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {signSchema} from '../schema/SignSchema';
 import {postSignUp} from '../apis/signApi';
+import {useMutation} from '@tanstack/react-query';
+import {useAlert} from '../components/common/AlertProvider';
 
 const SignUpScreen = () => {
   const navigation = useNavigation<SignUpNavigationProps>();
+  const {showAlert} = useAlert();
 
   const {
     control,
@@ -19,12 +22,19 @@ const SignUpScreen = () => {
     resolver: zodResolver(signSchema),
   });
 
-  const onSubmit = async (data: SignFormValues) => {
-    const response = await postSignUp(data);
-    if (response) {
+  const mutation = useMutation({
+    mutationKey: ['postSignUp'],
+    mutationFn: postSignUp,
+    onSuccess: () => {
       navigation.navigate('SignInScreen');
-    }
-    console.log('signup response: ', response);
+    },
+    onError: () => {
+      showAlert('회원가입 중 오류가 발생했습니다.');
+    },
+  });
+
+  const onSubmit = (data: SignFormValues) => {
+    mutation.mutate(data);
   };
 
   return (

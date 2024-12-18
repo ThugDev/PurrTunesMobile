@@ -13,9 +13,6 @@ userInstance.interceptors.request.use(
       if (noAuthPaths.some(path => config.url?.includes(path))) {
         return config;
       }
-
-      console.log('config', config);
-
       const token = await AsyncStorage.getItem('authToken');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
