@@ -4,11 +4,21 @@ import {useYouTubePlayer} from '../hooks/useYouTubePlayer';
 import {getVideoId} from '../utils/getVideoId';
 import YouTubePlayer from 'react-native-youtube-iframe';
 import {PlayerScreenProps} from './type';
+import {postLatestList} from '../apis/latestListAPI';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
   const videoId = getVideoId(album.id);
   const {isPlaying, handleStateChange, togglePlay} = useYouTubePlayer();
+
+  const handlePlay = async () => {
+    togglePlay();
+    if (!isPlaying) {
+      console.log(typeof videoId);
+      const response = await postLatestList(videoId);
+      console.log(response);
+    }
+  };
 
   return (
     <View className="flex-1 justify-center items-center p-4 mt-40">
@@ -28,7 +38,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
           onChangeState={handleStateChange}
         />
       </View>
-      <Button title={isPlaying ? 'Pause' : 'Play'} onPress={togglePlay} />
+      <Button title={isPlaying ? 'Pause' : 'Play'} onPress={handlePlay} />
     </View>
   );
 };

@@ -2,11 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import Config from 'react-native-config';
 
-export const userInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: `${Config.BASE_URL}`,
 });
 
-userInstance.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   async config => {
     try {
       const noAuthPaths = ['auth/signUp', 'auth/signIn'];
@@ -15,7 +15,7 @@ userInstance.interceptors.request.use(
       }
       const token = await AsyncStorage.getItem('authToken');
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `${token}`;
       }
     } catch (error) {
       console.error('Error in request interceptor: ', error);
