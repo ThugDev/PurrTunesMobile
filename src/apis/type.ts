@@ -58,3 +58,13 @@ export type Thumbnail = {
   medium: YouTubeThumbnail;
   high: YouTubeThumbnail;
 };
+
+export type FetchSignProps = {
+  email: string;
+  password: string;
+};
+
+export type SignResponse = {
+  email: string;
+  password: string;
+};

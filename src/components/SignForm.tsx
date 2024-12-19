@@ -12,7 +12,7 @@ const SignForm = ({onSubmit, errors, control, buttonText}: SignInFormProps) => {
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <TextInput
-              className="bg-white w-[200px] h-6 rounded px-2"
+              className="bg-white w-[200px] h-10 rounded px-2"
               placeholder="이메일을 입력해주세요"
               autoCapitalize="none"
               onBlur={onBlur}
@@ -31,7 +31,7 @@ const SignForm = ({onSubmit, errors, control, buttonText}: SignInFormProps) => {
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <TextInput
-              className="bg-white w-[200px] h-6 rounded px-2"
+              className="bg-white w-[200px] h-10 rounded px-2"
               placeholder="비밀번호를 입력해주세요"
               autoCapitalize="none"
               secureTextEntry={true}

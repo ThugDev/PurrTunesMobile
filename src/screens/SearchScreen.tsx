@@ -43,7 +43,7 @@ const SearchScreen = () => {
   }
 
   return (
-    <View className="flex-1 p-4">
+    <View className="flex-1 p-4 mt-10">
       <Text className="text-xl font-bold mb-4">{query}</Text>
       <FlatList
         data={result}

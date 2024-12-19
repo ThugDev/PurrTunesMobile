@@ -6,9 +6,13 @@ import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {signSchema} from '../schema/SignSchema';
+import {postSignUp} from '../apis/signApi';
+import {useMutation} from '@tanstack/react-query';
+import {useAlert} from '../components/common/AlertProvider';
 
 const SignUpScreen = () => {
   const navigation = useNavigation<SignUpNavigationProps>();
+  const {showAlert} = useAlert();
 
   const {
     control,
@@ -18,13 +22,23 @@ const SignUpScreen = () => {
     resolver: zodResolver(signSchema),
   });
 
+  const mutation = useMutation({
+    mutationKey: ['postSignUp'],
+    mutationFn: postSignUp,
+    onSuccess: () => {
+      navigation.navigate('SignInScreen');
+    },
+    onError: () => {
+      showAlert('회원가입 중 오류가 발생했습니다.');
+    },
+  });
+
   const onSubmit = (data: SignFormValues) => {
-    console.log(data);
-    navigation.navigate('SignInScreen');
+    mutation.mutate(data);
   };
 
   return (
-    <View className="flex justify-center items-center w-full h-screen">
+    <View className="flex mt-20 items-center w-full h-screen">
       <View className="flex justify-center items-center">
         <Text className="text-2xl font-bold">PurrTunesMobile</Text>
         <SignForm
