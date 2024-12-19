@@ -19,3 +19,17 @@ export type PopularListProps = {
   albums: AlbumType[];
   handlePress: (item: AlbumType) => void;
 };
+
+export type LatestListProps = {
+  albums: AlbumType[];
+  handlePress: (item: AlbumType) => void;
+};
+
+export type LatestAlbum = {
+  listId: number;
+  videoId: string;
+};
+
+export type LatestAlbumsResponse = {
+  list: LatestAlbum[];
+};

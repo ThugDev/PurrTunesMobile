@@ -14,9 +14,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
   const handlePlay = async () => {
     togglePlay();
     if (!isPlaying) {
-      console.log(typeof videoId);
-      const response = await postLatestList(videoId);
-      console.log(response);
+      await postLatestList(videoId);
     }
   };
 

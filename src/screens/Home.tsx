@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
 import {useNavigation} from '@react-navigation/native';
 import {fetchPopularAlbums} from '../apis/YoutubeAPI';
@@ -8,7 +8,8 @@ import {HomeNavigationProps} from './type';
 import AlbumSearch from '../components/AlbumSearch';
 import PopularList from '../components/PopularList';
 import LatestList from '../components/LatestList';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingScreen from '../components/LoadingScreen';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -25,16 +26,13 @@ const Home = () => {
     navigation.navigate('PlayerScreen', {album});
   };
 
-  // const onLogout = async () => {
-  //   await AsyncStorage.removeItem('authToken');
-  // };
+  const onLogout = async () => {
+    await AsyncStorage.removeItem('authToken');
+    navigation.navigate('SignInScreen');
+  };
 
   if (isLoading) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   if (isError) {
@@ -47,12 +45,15 @@ const Home = () => {
 
   return (
     <View className="flex-1 p-4 mt-10">
-      {/* <TouchableOpacity onPress={onLogout}>
-        <Text>로그아웃</Text>
-      </TouchableOpacity> */}
-
+      <View className="w-full flex justify-center items-center">
+        <TouchableOpacity
+          onPress={onLogout}
+          className="my-4 border p-2 rounded bg-gray-400">
+          <Text className="text-md font-bold">로그아웃</Text>
+        </TouchableOpacity>
+      </View>
       <AlbumSearch />
-      <LatestList albums={albums} />
+      <LatestList albums={albums} handlePress={handlePress} />
       <PopularList albums={albums} handlePress={handlePress} />
     </View>
   );

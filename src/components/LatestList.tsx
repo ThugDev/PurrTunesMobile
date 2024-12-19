@@ -1,44 +1,30 @@
 import React from 'react';
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
-import {AlbumType} from '../apis/type';
 import {useQuery} from '@tanstack/react-query';
 import {getLatestList} from '../apis/latestListAPI';
 import {getVideoId} from '../utils/getVideoId';
+import {LatestAlbum, LatestAlbumsResponse, LatestListProps} from './type';
+import LoadingScreen from './LoadingScreen';
 
-export type LatestListProps = {
-  albums: AlbumType[];
-};
-export type LatestAlbum = {
-  listId: number;
-  videoId: string;
-};
-
-export type LatestAlbumsResponse = {
-  list: LatestAlbum[];
-};
-
-const LatestList = ({albums}: LatestListProps) => {
+const LatestList = ({albums, handlePress}: LatestListProps) => {
   const {
     data: latestAlbums = {list: []},
     isError,
     isLoading,
+    error,
   } = useQuery<LatestAlbumsResponse>({
     queryKey: ['latestList'],
     queryFn: getLatestList,
   });
 
   if (isLoading) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   if (isError) {
     return (
       <View className="flex-1 justify-center items-center">
-        <Text>Error</Text>
+        <Text>{error.message}</Text>
       </View>
     );
   }
@@ -61,7 +47,9 @@ const LatestList = ({albums}: LatestListProps) => {
           numColumns={3}
           keyExtractor={item => getVideoId(item.id)}
           renderItem={({item}) => (
-            <TouchableOpacity className="w-20 h-20 m-2">
+            <TouchableOpacity
+              onPress={() => handlePress(item)}
+              className="w-20 h-20 m-2">
               <View className="w-20 h-20">
                 <Image
                   source={{uri: item.thumbnail?.medium.url}}
