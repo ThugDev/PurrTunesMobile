@@ -5,16 +5,19 @@ import {getVideoId} from '../utils/getVideoId';
 import YouTubePlayer from 'react-native-youtube-iframe';
 import {PlayerScreenProps} from './type';
 import {postLatestList} from '../apis/latestListAPI';
+import {useQueryClient} from '@tanstack/react-query';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
   const videoId = getVideoId(album.id);
   const {isPlaying, handleStateChange, togglePlay} = useYouTubePlayer();
+  const queryClient = useQueryClient();
 
   const handlePlay = async () => {
     togglePlay();
     if (!isPlaying) {
       await postLatestList(videoId);
+      queryClient.invalidateQueries({queryKey: ['latestList']});
     }
   };
 
