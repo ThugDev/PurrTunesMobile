@@ -1,12 +1,15 @@
 import React from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
 import {useNavigation} from '@react-navigation/native';
 import {fetchPopularAlbums} from '../apis/YoutubeAPI';
 import {useQuery} from '@tanstack/react-query';
 import {HomeNavigationProps} from './type';
 import AlbumSearch from '../components/AlbumSearch';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import PopularList from '../components/PopularList';
+import LatestList from '../components/LatestList';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingScreen from '../components/LoadingScreen';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -23,16 +26,13 @@ const Home = () => {
     navigation.navigate('PlayerScreen', {album});
   };
 
-  // const onLogout = async () => {
-  //   await AsyncStorage.removeItem('authToken');
-  // };
+  const onLogout = async () => {
+    await AsyncStorage.removeItem('authToken');
+    navigation.navigate('SignInScreen');
+  };
 
   if (isLoading) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   if (isError) {
@@ -44,32 +44,20 @@ const Home = () => {
   }
 
   return (
-    <View className="flex-1 p-4 mt-10">
-      {/* <TouchableOpacity onPress={onLogout}>
-        <Text>로그아웃</Text>
-      </TouchableOpacity> */}
-      <AlbumSearch />
-      <Text className="text-xl font-bold mb-4">Popular Albums</Text>
-      <FlatList
-        data={albums}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => handlePress(item)} className="mb-4">
-            <View className="flex-row items-center">
-              <Image
-                source={{uri: item.thumbnail.medium.url}}
-                className="w-20 h-20 mr-2.5"
-              />
-              <View>
-                <Text className="font-semibold">{item.title}</Text>
-                <Text>{item.channelTitle}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-        keyExtractor={item => item.id.toString()}
-        contentContainerStyle={{flexGrow: 1}}
-      />
-    </View>
+    <ScrollView className="py-20">
+      <View className="p-2">
+        <AlbumSearch />
+        <LatestList albums={albums} handlePress={handlePress} />
+      </View>
+      <PopularList albums={albums} handlePress={handlePress} />
+      <View className="w-full flex justify-center items-center">
+        <TouchableOpacity
+          onPress={onLogout}
+          className="mb-10 border p-2 rounded bg-gray-400">
+          <Text className="text-md font-bold">로그아웃</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 

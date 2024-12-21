@@ -6,6 +6,7 @@ import {useQuery} from '@tanstack/react-query';
 import {fetchSearchResult} from '../apis/YoutubeAPI';
 import {getVideoId} from '../utils/getVideoId';
 import {HomeNavigationProps} from './type';
+import LoadingScreen from '../components/LoadingScreen';
 
 const SearchScreen = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -27,11 +28,7 @@ const SearchScreen = () => {
   };
 
   if (isLoading) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text>로딩중......</Text>
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   if (isError) {

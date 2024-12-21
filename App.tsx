@@ -10,7 +10,7 @@ import SignInScreen from './src/screens/SignInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import {AlertProvider} from './src/components/common/AlertProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ActivityIndicator, Text, View} from 'react-native';
+import LoadingScreen from './src/components/LoadingScreen';
 
 export type RootStackParmList = {
   SignInScreen: undefined;
@@ -40,12 +40,7 @@ const App = () => {
   }, []);
 
   if (isAuthenticated === null) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <ActivityIndicator size={'large'} color={'#0000ff'} />
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   return (

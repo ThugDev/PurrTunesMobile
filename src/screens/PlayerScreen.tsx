@@ -4,11 +4,23 @@ import {useYouTubePlayer} from '../hooks/useYouTubePlayer';
 import {getVideoId} from '../utils/getVideoId';
 import YouTubePlayer from 'react-native-youtube-iframe';
 import {PlayerScreenProps} from './type';
+import {postLatestList} from '../apis/latestListAPI';
+import {useQueryClient} from '@tanstack/react-query';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
   const videoId = getVideoId(album.id);
   const {isPlaying, handleStateChange, togglePlay} = useYouTubePlayer();
+  const queryClient = useQueryClient();
+
+  const handlePlay = async () => {
+    togglePlay();
+    if (!isPlaying) {
+      await postLatestList(videoId);
+      queryClient.invalidateQueries({queryKey: ['latestList']});
+      queryClient.refetchQueries({queryKey: ['latestList']});
+    }
+  };
 
   return (
     <View className="flex-1 justify-center items-center p-4 mt-40">
@@ -28,7 +40,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
           onChangeState={handleStateChange}
         />
       </View>
-      <Button title={isPlaying ? 'Pause' : 'Play'} onPress={togglePlay} />
+      <Button title={isPlaying ? 'Pause' : 'Play'} onPress={handlePlay} />
     </View>
   );
 };

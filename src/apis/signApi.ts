@@ -1,10 +1,10 @@
-import {userInstance} from './axiosInstance';
+import {axiosInstance} from './axiosInstance';
 import {FetchSignProps} from './type';
 
 export const postSignIn = async ({email, password}: FetchSignProps) => {
   try {
     const userData = {email, password};
-    const response = await userInstance.post('/auth/signIn', userData);
+    const response = await axiosInstance.post('/auth/signIn', userData);
     return response;
   } catch (error) {
     throw error;
@@ -14,7 +14,7 @@ export const postSignIn = async ({email, password}: FetchSignProps) => {
 export const postSignUp = async ({email, password}: FetchSignProps) => {
   try {
     const userData = {email, password};
-    const response = await userInstance.post('/auth/signUp', userData);
+    const response = await axiosInstance.post('/auth/signUp', userData);
     return response;
   } catch (error) {
     throw error;
