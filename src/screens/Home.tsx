@@ -44,20 +44,19 @@ const Home = () => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView className="py-20">
       <View className="p-2">
-        <View className="w-full flex justify-center items-center">
-          <TouchableOpacity
-            onPress={onLogout}
-            className="my-4 border p-2 rounded bg-gray-400">
-            <Text className="text-md font-bold">로그아웃</Text>
-          </TouchableOpacity>
-        </View>
         <AlbumSearch />
         <LatestList albums={albums} handlePress={handlePress} />
       </View>
-
       <PopularList albums={albums} handlePress={handlePress} />
+      <View className="w-full flex justify-center items-center">
+        <TouchableOpacity
+          onPress={onLogout}
+          className="mb-10 border p-2 rounded bg-gray-400">
+          <Text className="text-md font-bold">로그아웃</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
