@@ -1,15 +1,17 @@
 import React from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {PopularListProps} from './type';
 
 const PopularList = ({albums, handlePress}: PopularListProps) => {
   return (
-    <View className=" h-full flex-1 p-4 mt-10">
-      <Text className="text-xl font-bold mb-4">Popular Albums</Text>
-      <FlatList
-        data={albums}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => handlePress(item)} className="mb-4">
+    <View className=" h-full flex-1 p-4 ">
+      <Text className="text-xl font-bold mb-4">인기 목록</Text>
+      <ScrollView>
+        {albums.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => handlePress(item)}
+            className="mb-4">
             <View className="flex-row items-center">
               <Image
                 source={{uri: item.thumbnail.medium.url}}
@@ -21,10 +23,8 @@ const PopularList = ({albums, handlePress}: PopularListProps) => {
               </View>
             </View>
           </TouchableOpacity>
-        )}
-        keyExtractor={item => item.id.toString()}
-        contentContainerStyle={{flexGrow: 1}}
-      />
+        ))}
+      </ScrollView>
     </View>
   );
 };

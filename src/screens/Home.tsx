@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
 import {useNavigation} from '@react-navigation/native';
 import {fetchPopularAlbums} from '../apis/YoutubeAPI';
@@ -10,7 +10,6 @@ import PopularList from '../components/PopularList';
 import LatestList from '../components/LatestList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../components/LoadingScreen';
-import {getVideoId} from '../utils/getVideoId';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -45,27 +44,21 @@ const Home = () => {
   }
 
   return (
-    <FlatList
-      data={albums}
-      renderItem={null}
-      ListHeaderComponent={
-        <View className="p-2">
-          <View className="w-full flex justify-center items-center">
-            <TouchableOpacity
-              onPress={onLogout}
-              className="my-4 border p-2 rounded bg-gray-400">
-              <Text className="text-md font-bold">로그아웃</Text>
-            </TouchableOpacity>
-          </View>
-          <AlbumSearch />
-          <LatestList albums={albums} handlePress={handlePress} />
+    <ScrollView>
+      <View className="p-2">
+        <View className="w-full flex justify-center items-center">
+          <TouchableOpacity
+            onPress={onLogout}
+            className="my-4 border p-2 rounded bg-gray-400">
+            <Text className="text-md font-bold">로그아웃</Text>
+          </TouchableOpacity>
         </View>
-      }
-      ListFooterComponent={
-        <PopularList albums={albums} handlePress={handlePress} />
-      }
-      keyExtractor={item => getVideoId(item.id)}
-    />
+        <AlbumSearch />
+        <LatestList albums={albums} handlePress={handlePress} />
+      </View>
+
+      <PopularList albums={albums} handlePress={handlePress} />
+    </ScrollView>
   );
 };
 

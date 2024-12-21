@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
 import {getLatestList} from '../apis/latestListAPI';
 import {getVideoId} from '../utils/getVideoId';
@@ -16,7 +16,6 @@ const LatestList = ({albums, handlePress}: LatestListProps) => {
     queryKey: ['latestList'],
     queryFn: getLatestList,
   });
-  console.log('latest albums', latestAlbums.list);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -43,16 +42,15 @@ const LatestList = ({albums, handlePress}: LatestListProps) => {
     .slice(0, 9); // null 값은 필터링
 
   return (
-    <View className="w-full h-[300px]">
+    <View className="w-full">
       <Text className="text-2xl font-bold"> 최신 재생 목록 </Text>
       <View className="w-full flex justify-center items-center">
-        <FlatList
-          className="w-full mt-4"
-          data={matchedAlbum}
-          numColumns={3}
-          keyExtractor={item => getVideoId(item.id)}
-          renderItem={({item}) => (
+        <ScrollView
+          horizontal
+          contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}>
+          {matchedAlbum.map((item, index) => (
             <TouchableOpacity
+              key={index}
               onPress={() => handlePress(item)}
               className="w-20 h-20 m-2">
               <View className="w-20 h-20">
@@ -62,8 +60,8 @@ const LatestList = ({albums, handlePress}: LatestListProps) => {
                 />
               </View>
             </TouchableOpacity>
-          )}
-        />
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
