@@ -18,6 +18,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
     if (!isPlaying) {
       await postLatestList(videoId);
       queryClient.invalidateQueries({queryKey: ['latestList']});
+      queryClient.refetchQueries({queryKey: ['latestList']});
     }
   };
 

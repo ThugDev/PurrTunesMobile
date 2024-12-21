@@ -4,7 +4,7 @@ import {PopularListProps} from './type';
 
 const PopularList = ({albums, handlePress}: PopularListProps) => {
   return (
-    <View className="flex-1 p-4 mt-10">
+    <View className=" h-full flex-1 p-4 mt-10">
       <Text className="text-xl font-bold mb-4">Popular Albums</Text>
       <FlatList
         data={albums}

@@ -28,6 +28,7 @@ export type LatestListProps = {
 export type LatestAlbum = {
   listId: number;
   videoId: string;
+  albumType?: AlbumType; // 추가되어야함
 };
 
 export type LatestAlbumsResponse = {
