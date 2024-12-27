@@ -6,6 +6,7 @@ import YouTubePlayer from 'react-native-youtube-iframe';
 import {PlayerScreenProps} from './type';
 import {postLatestList} from '../apis/latestListAPI';
 import {useQueryClient} from '@tanstack/react-query';
+import BookMark from '../components/BookMark';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
@@ -19,6 +20,8 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
       await postLatestList(videoId);
       queryClient.invalidateQueries({queryKey: ['latestList']});
       queryClient.refetchQueries({queryKey: ['latestList']});
+      queryClient.invalidateQueries({queryKey: ['markList']});
+      queryClient.refetchQueries({queryKey: ['markList']});
     }
   };
 
@@ -33,6 +36,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
           {album.title}
         </Text>
         <Text className="text-xl text-#cccccc">{album.channelTitle}</Text>
+        <BookMark album={album} />
         <YouTubePlayer
           videoId={videoId}
           height={250}
