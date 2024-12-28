@@ -10,6 +10,7 @@ import PopularList from '../components/PopularList';
 import LatestList from '../components/LatestList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../components/LoadingScreen';
+import BookMarkList from '../components/BookMarkList';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -48,6 +49,7 @@ const Home = () => {
       <View className="p-2">
         <AlbumSearch />
         <LatestList albums={albums} handlePress={handlePress} />
+        <BookMarkList albums={albums} handlePress={handlePress} />
       </View>
       <PopularList albums={albums} handlePress={handlePress} />
       <View className="w-full flex justify-center items-center">

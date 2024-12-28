@@ -34,3 +34,21 @@ export type LatestAlbum = {
 export type LatestAlbumsResponse = {
   list: LatestAlbum[];
 };
+
+export type BookMarkProps = {
+  album: AlbumType;
+};
+
+export type BookMarkListProps = {
+  albums: AlbumType[];
+  handlePress: (item: AlbumType) => void;
+};
+
+export type BookMarkResponse = {
+  markList: BookMarkItem[];
+};
+
+export type BookMarkItem = {
+  markId: string;
+  videoId: string;
+};
