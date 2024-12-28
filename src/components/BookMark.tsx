@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {AlbumType} from '../apis/type';
 import {postBookMarkAPI} from '../apis/bookmarkAPI';
 import {getVideoId} from '../utils/getVideoId';
-
-export type BookMarkProps = {
-  album: AlbumType;
-};
+import {BookMarkProps} from './type';
 
 const BookMark = ({album}: BookMarkProps) => {
-  const [isClick, setIsClick] = useState(false);
+  const [isClick, setIsClick] = useState<boolean>(false);
 
   const onBookMark = async () => {
     if (!isClick) {

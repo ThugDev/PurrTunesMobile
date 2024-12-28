@@ -35,6 +35,10 @@ export type LatestAlbumsResponse = {
   list: LatestAlbum[];
 };
 
+export type BookMarkProps = {
+  album: AlbumType;
+};
+
 export type BookMarkListProps = {
   albums: AlbumType[];
   handlePress: (item: AlbumType) => void;
