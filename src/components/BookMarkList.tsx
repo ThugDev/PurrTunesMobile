@@ -19,7 +19,7 @@ const BookMarkList = ({handlePress}: BookMarkListProps) => {
   });
 
   const bookMarkData = createRows(
-    bookmarkAlbums.markList.reverse().slice(0, 9),
+    bookmarkAlbums.markList.slice(0, 9).reverse(),
     3,
   );
 
