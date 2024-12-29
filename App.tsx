@@ -11,13 +11,13 @@ import SignUpScreen from './src/screens/SignUpScreen';
 import {AlertProvider} from './src/components/common/AlertProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from './src/components/common/LoadingScreen';
-import {latestAlbumType} from './src/components/type';
+import {SavedAlbumType} from './src/components/type';
 
 export type RootStackParmList = {
   SignInScreen: undefined;
   SignUpScreen: undefined;
   Home: undefined;
-  PlayerScreen: {album: AlbumType | latestAlbumType};
+  PlayerScreen: {album: AlbumType | SavedAlbumType};
   SearchScreen: {query: string};
 };
 
