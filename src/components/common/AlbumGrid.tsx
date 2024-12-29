@@ -1,10 +1,10 @@
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
-import {latestAlbumType} from '../type';
+import {SavedAlbumType} from '../type';
 
 export type AlbumGridProps = {
-  data: latestAlbumType[][];
-  handlePress: (item: latestAlbumType) => void;
+  data: SavedAlbumType[][];
+  handlePress: (item: SavedAlbumType) => void;
 };
 
 const AlbumGrid = ({data, handlePress}: AlbumGridProps) => {

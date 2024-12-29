@@ -21,10 +21,10 @@ export type PopularListProps = {
 };
 
 export type LatestListProps = {
-  handlePress: (item: latestAlbumType) => void;
+  handlePress: (item: SavedAlbumType) => void;
 };
 
-export type latestAlbumType = {
+export type SavedAlbumType = {
   id:
     | string
     | {
@@ -47,23 +47,23 @@ export type latestThumbnail = {
 export type LatestAlbum = {
   listId: number;
   videoId: string;
-  albumType: latestAlbumType;
+  albumType: SavedAlbumType;
 };
 
 export type LatestAlbumsResponse = {
-  list: latestAlbumType[];
+  list: SavedAlbumType[];
 };
 
 export type BookMarkProps = {
-  album: AlbumType | latestAlbumType;
+  album: AlbumType | SavedAlbumType;
 };
 
 export type BookMarkListProps = {
-  handlePress: (item: latestAlbumType) => void;
+  handlePress: (item: SavedAlbumType) => void;
 };
 
 export type BookMarkResponse = {
-  markList: latestAlbumType[];
+  markList: SavedAlbumType[];
 };
 
 export type BookMarkItem = {

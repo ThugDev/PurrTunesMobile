@@ -11,8 +11,8 @@ import LatestList from '../components/LatestList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../components/common/LoadingScreen';
 import BookMarkList from '../components/BookMarkList';
-import {latestAlbumType} from '../components/type';
 import {ErrorScreen} from '../components/common/ErrorScreen';
+import {SavedAlbumType} from '../components/type';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -25,7 +25,7 @@ const Home = () => {
     queryFn: fetchPopularAlbums,
   });
 
-  const handlePressLatest = (album: latestAlbumType) => {
+  const handlePressLatest = (album: SavedAlbumType) => {
     navigation.navigate('PlayerScreen', {album});
   };
 
