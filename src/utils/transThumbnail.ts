@@ -7,5 +7,5 @@ export const transThumbnail = (
   if ('medium' in thumbnail && thumbnail.medium?.url) {
     return thumbnail.medium.url;
   }
-  throw new Error('Invalid thumbnail format');
+  throw new Error('thumbnail format Error');
 };
