@@ -18,7 +18,7 @@ const LatestList = ({handlePress}: LatestListProps) => {
     queryFn: getLatestList,
   });
 
-  const latestData = createRows(latestAlbums.list.slice(0, 9), 3).reverse();
+  const latestData = createRows(latestAlbums.list.slice(0, 9).reverse(), 3);
 
   if (isLoading) {
     return <LoadingScreen />;

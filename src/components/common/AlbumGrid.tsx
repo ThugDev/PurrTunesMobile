@@ -1,15 +1,10 @@
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
-import {SavedAlbumType} from '../type';
-
-export type AlbumGridProps = {
-  data: SavedAlbumType[][];
-  handlePress: (item: SavedAlbumType) => void;
-};
+import {AlbumGridProps} from './type';
 
 const AlbumGrid = ({data, handlePress}: AlbumGridProps) => {
   return (
-    <View className=" items-center">
+    <View className=" items-start">
       {data.map((rows, index) => (
         <View key={index} className=" flex-row justify-center">
           {rows.map((item, idx) => (
