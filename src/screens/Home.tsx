@@ -9,8 +9,10 @@ import AlbumSearch from '../components/AlbumSearch';
 import PopularList from '../components/PopularList';
 import LatestList from '../components/LatestList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LoadingScreen from '../components/LoadingScreen';
+import LoadingScreen from '../components/common/LoadingScreen';
 import BookMarkList from '../components/BookMarkList';
+import {ErrorScreen} from '../components/common/ErrorScreen';
+import {SavedAlbumType} from '../components/type';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -23,7 +25,11 @@ const Home = () => {
     queryFn: fetchPopularAlbums,
   });
 
-  const handlePress = (album: AlbumType) => {
+  const handlePressLatest = (album: SavedAlbumType) => {
+    navigation.navigate('PlayerScreen', {album});
+  };
+
+  const handlePressPopular = (album: AlbumType) => {
     navigation.navigate('PlayerScreen', {album});
   };
 
@@ -37,21 +43,17 @@ const Home = () => {
   }
 
   if (isError) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-#ff0000">ERROR</Text>
-      </View>
-    );
+    return <ErrorScreen />;
   }
 
   return (
     <ScrollView className="py-20">
       <View className="p-2">
         <AlbumSearch />
-        <LatestList albums={albums} handlePress={handlePress} />
-        <BookMarkList albums={albums} handlePress={handlePress} />
+        <LatestList handlePress={handlePressLatest} />
+        <BookMarkList handlePress={handlePressLatest} />
       </View>
-      <PopularList albums={albums} handlePress={handlePress} />
+      <PopularList albums={albums} handlePress={handlePressPopular} />
       <View className="w-full flex justify-center items-center">
         <TouchableOpacity
           onPress={onLogout}

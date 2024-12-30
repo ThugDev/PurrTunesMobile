@@ -21,31 +21,49 @@ export type PopularListProps = {
 };
 
 export type LatestListProps = {
-  albums: AlbumType[];
-  handlePress: (item: AlbumType) => void;
+  handlePress: (item: SavedAlbumType) => void;
+};
+
+export type SavedAlbumType = {
+  id:
+    | string
+    | {
+        kind: string;
+        videoId: string;
+      };
+  title: string;
+  thumbnail: latestThumbnail;
+  description: string;
+  channelTitle: string;
+  publishedAt: string;
+};
+
+export type latestThumbnail = {
+  url: string;
+  width: number;
+  height: number;
 };
 
 export type LatestAlbum = {
   listId: number;
   videoId: string;
-  albumType?: AlbumType; // 추가되어야함
+  albumType: SavedAlbumType;
 };
 
 export type LatestAlbumsResponse = {
-  list: LatestAlbum[];
+  list: SavedAlbumType[];
 };
 
 export type BookMarkProps = {
-  album: AlbumType;
+  album: AlbumType | SavedAlbumType;
 };
 
 export type BookMarkListProps = {
-  albums: AlbumType[];
-  handlePress: (item: AlbumType) => void;
+  handlePress: (item: SavedAlbumType) => void;
 };
 
 export type BookMarkResponse = {
-  markList: BookMarkItem[];
+  markList: SavedAlbumType[];
 };
 
 export type BookMarkItem = {

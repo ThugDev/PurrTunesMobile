@@ -7,6 +7,7 @@ import {PlayerScreenProps} from './type';
 import {postLatestList} from '../apis/latestListAPI';
 import {useQueryClient} from '@tanstack/react-query';
 import BookMark from '../components/BookMark';
+import {transThumbnail} from '../utils/transThumbnail';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
@@ -19,8 +20,8 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
     if (!isPlaying) {
       await postLatestList(videoId);
       queryClient.invalidateQueries({queryKey: ['latestList']});
-      queryClient.refetchQueries({queryKey: ['latestList']});
       queryClient.invalidateQueries({queryKey: ['markList']});
+      queryClient.refetchQueries({queryKey: ['latestList']});
       queryClient.refetchQueries({queryKey: ['markList']});
     }
   };
@@ -29,7 +30,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
     <View className="flex-1 justify-center items-center p-4 mt-40">
       <View className="flex justify-center items-center h-[300px]">
         <Image
-          source={{uri: album.thumbnail.medium.url}}
+          source={{uri: transThumbnail(album.thumbnail)}}
           className="w-[200px] h-[200px] mb-5"
         />
         <Text className="text-2xl font-bold" numberOfLines={2}>

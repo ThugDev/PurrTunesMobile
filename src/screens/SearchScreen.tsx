@@ -6,7 +6,7 @@ import {useQuery} from '@tanstack/react-query';
 import {fetchSearchResult} from '../apis/YoutubeAPI';
 import {getVideoId} from '../utils/getVideoId';
 import {HomeNavigationProps} from './type';
-import LoadingScreen from '../components/LoadingScreen';
+import LoadingScreen from '../components/common/LoadingScreen';
 
 const SearchScreen = () => {
   const navigation = useNavigation<HomeNavigationProps>();
