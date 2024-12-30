@@ -25,6 +25,7 @@ export type LatestListProps = {
 };
 
 export type SavedAlbumType = {
+  markId?: string;
   id:
     | string
     | {

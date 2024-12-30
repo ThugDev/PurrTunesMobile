@@ -31,7 +31,7 @@ const LatestList = ({handlePress}: LatestListProps) => {
   return (
     <View className="w-full">
       <Text className="text-2xl font-bold"> 최신 재생 목록 </Text>
-      <View className="w-full flex justify-center items-center">
+      <View className="w-full flex justify-center items-start">
         <AlbumGrid data={latestData} handlePress={handlePress} />
       </View>
     </View>
