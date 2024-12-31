@@ -11,23 +11,19 @@ export const getBookMarkAPI = async () => {
 };
 
 export const postBookMarkAPI = async (videoId: string) => {
-  console.log(videoId, 'video id');
   try {
     const response = await axiosInstance.post('/bookmark', {videoId: videoId});
     return response;
   } catch (error) {
-    console.error('post bookmark', error);
     throw error;
   }
 };
 
-export const deleteBookMarkAPI = async (markId: string) => {
+export const deleteBookMarkAPI = async (markId: string | undefined) => {
   try {
-    const response = await axiosInstance.delete(`bookmark${markId}`);
-    console.log(response);
+    const response = await axiosInstance.delete(`/bookmark/${markId}`);
     return response;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
