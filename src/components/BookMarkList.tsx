@@ -1,35 +1,14 @@
 import React from 'react';
-import {useQuery} from '@tanstack/react-query';
-import {getBookMarkAPI} from '../apis/bookmarkAPI';
 import {Text, View} from 'react-native';
-import LoadingScreen from './common/LoadingScreen';
-import {BookMarkListProps, BookMarkResponse} from './type';
+import {BookMarkListProps} from './type';
 import {createRows} from '../utils/createRows';
 import AlbumGrid from './common/AlbumGrid';
-import {ErrorScreen} from './common/ErrorScreen';
 
-const BookMarkList = ({handlePress}: BookMarkListProps) => {
-  const {
-    data: bookmarkAlbums = {markList: []},
-    isError,
-    isLoading,
-  } = useQuery<BookMarkResponse>({
-    queryKey: ['markList'],
-    queryFn: getBookMarkAPI,
-  });
-
+const BookMarkList = ({bookmarkAlbums, handlePress}: BookMarkListProps) => {
   const bookMarkData = createRows(
     bookmarkAlbums.markList.slice(0, 9).reverse(),
     3,
   );
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (isError) {
-    return <ErrorScreen />;
-  }
 
   return (
     <View className="w-full">

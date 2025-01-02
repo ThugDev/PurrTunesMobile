@@ -2,8 +2,6 @@ import React from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
 import {useNavigation} from '@react-navigation/native';
-import {fetchPopularAlbums} from '../apis/YoutubeAPI';
-import {useQuery} from '@tanstack/react-query';
 import {HomeNavigationProps} from './type';
 import AlbumSearch from '../components/AlbumSearch';
 import PopularList from '../components/PopularList';
@@ -13,23 +11,15 @@ import LoadingScreen from '../components/common/LoadingScreen';
 import BookMarkList from '../components/BookMarkList';
 import {ErrorScreen} from '../components/common/ErrorScreen';
 import {SavedAlbumType} from '../components/type';
+import useAlbums from '../hooks/useAlbums';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
-  const {
-    data: albums = [],
-    isLoading,
-    isError,
-  } = useQuery<AlbumType[], Error>({
-    queryKey: ['popularAlbums'],
-    queryFn: fetchPopularAlbums,
-  });
 
-  const handlePressLatest = (album: SavedAlbumType) => {
-    navigation.navigate('PlayerScreen', {album});
-  };
+  const {latestAlbums, popularAlbums, bookmarkAlbums, isLoading, isError} =
+    useAlbums();
 
-  const handlePressPopular = (album: AlbumType) => {
+  const handlePress = (album: SavedAlbumType | AlbumType) => {
     navigation.navigate('PlayerScreen', {album});
   };
 
@@ -50,10 +40,13 @@ const Home = () => {
     <ScrollView className="py-20">
       <View className="p-2">
         <AlbumSearch />
-        <LatestList handlePress={handlePressLatest} />
-        <BookMarkList handlePress={handlePressLatest} />
+        <LatestList latestAlbums={latestAlbums} handlePress={handlePress} />
+        <BookMarkList
+          bookmarkAlbums={bookmarkAlbums}
+          handlePress={handlePress}
+        />
       </View>
-      <PopularList albums={albums} handlePress={handlePressPopular} />
+      <PopularList albums={popularAlbums} handlePress={handlePress} />
       <View className="w-full flex justify-center items-center">
         <TouchableOpacity
           onPress={onLogout}

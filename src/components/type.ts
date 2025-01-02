@@ -21,6 +21,7 @@ export type PopularListProps = {
 };
 
 export type LatestListProps = {
+  latestAlbums: LatestAlbumsResponse;
   handlePress: (item: SavedAlbumType) => void;
 };
 
@@ -60,6 +61,7 @@ export type BookMarkProps = {
 };
 
 export type BookMarkListProps = {
+  bookmarkAlbums: BookMarkResponse;
   handlePress: (item: SavedAlbumType) => void;
 };
 

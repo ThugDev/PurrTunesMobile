@@ -1,32 +1,11 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {useQuery} from '@tanstack/react-query';
-import {getLatestList} from '../apis/latestListAPI';
-import {LatestAlbumsResponse, LatestListProps} from './type';
-import LoadingScreen from './common/LoadingScreen';
+import {LatestListProps} from './type';
 import {createRows} from '../utils/createRows';
 import AlbumGrid from './common/AlbumGrid';
-import {ErrorScreen} from './common/ErrorScreen';
 
-const LatestList = ({handlePress}: LatestListProps) => {
-  const {
-    data: latestAlbums = {list: []},
-    isError,
-    isLoading,
-  } = useQuery<LatestAlbumsResponse>({
-    queryKey: ['latestList'],
-    queryFn: getLatestList,
-  });
-
+const LatestList = ({latestAlbums, handlePress}: LatestListProps) => {
   const latestData = createRows(latestAlbums.list.slice(0, 9).reverse(), 3);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (isError) {
-    return <ErrorScreen />;
-  }
 
   return (
     <View className="w-full">
