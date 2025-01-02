@@ -7,6 +7,7 @@ import {fetchSearchResult} from '../apis/YoutubeAPI';
 import {getVideoId} from '../utils/getVideoId';
 import {HomeNavigationProps} from './type';
 import LoadingScreen from '../components/common/LoadingScreen';
+import {ErrorScreen} from '../components/common/ErrorScreen';
 
 const SearchScreen = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -32,11 +33,7 @@ const SearchScreen = () => {
   }
 
   if (isError) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <Text>애러가 발생했습니다.</Text>
-      </View>
-    );
+    return <ErrorScreen />;
   }
 
   return (
