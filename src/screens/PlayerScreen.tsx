@@ -15,6 +15,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
   const videoId = getVideoId(album.id);
   const {
     isPlaying,
+    setIsPlaying,
     handleStateChange,
     togglePlay,
     currentTime,
@@ -32,6 +33,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
 
   const handleEnd = () => {
     setCurrentTime(0);
+    setIsPlaying(false);
     navigation.goBack();
   };
 

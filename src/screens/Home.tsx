@@ -5,13 +5,12 @@ import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProps} from './type';
 import AlbumSearch from '../components/AlbumSearch';
 import PopularList from '../components/PopularList';
-import LatestList from '../components/LatestList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../components/common/LoadingScreen';
-import BookMarkList from '../components/BookMarkList';
 import {ErrorScreen} from '../components/common/ErrorScreen';
 import {SavedAlbumType} from '../components/type';
 import useAlbums from '../hooks/useAlbums';
+import ListScreen from '../components/ListScreen';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -40,10 +39,15 @@ const Home = () => {
     <ScrollView className="py-20">
       <View className="p-2">
         <AlbumSearch />
-        <LatestList latestAlbums={latestAlbums} handlePress={handlePress} />
-        <BookMarkList
-          bookmarkAlbums={bookmarkAlbums}
+        <ListScreen
+          albums={latestAlbums}
           handlePress={handlePress}
+          title="최신 재생 목록"
+        />
+        <ListScreen
+          albums={bookmarkAlbums}
+          handlePress={handlePress}
+          title="즐겨찾기"
         />
       </View>
       <PopularList albums={popularAlbums} handlePress={handlePress} />
