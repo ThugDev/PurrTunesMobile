@@ -38,5 +38,6 @@ export const useYouTubePlayer = () => {
     handleStateChange,
     togglePlay,
     currentTime,
+    setCurrentTime,
   };
 };

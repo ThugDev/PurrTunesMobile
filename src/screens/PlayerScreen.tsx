@@ -8,12 +8,18 @@ import BookMark from '../components/BookMark';
 import {transThumbnail} from '../utils/transThumbnail';
 import {useNavigation} from '@react-navigation/native';
 import {usePostLatestList} from '../hooks/usePostLatestList';
+import {formatTime} from '../utils/formatTime';
 
 const PlayerScreen = ({route}: PlayerScreenProps) => {
   const {album} = route.params;
   const videoId = getVideoId(album.id);
-  const {isPlaying, handleStateChange, togglePlay, currentTime} =
-    useYouTubePlayer();
+  const {
+    isPlaying,
+    handleStateChange,
+    togglePlay,
+    currentTime,
+    setCurrentTime,
+  } = useYouTubePlayer();
   const navigation = useNavigation();
   const postLatest = usePostLatestList(videoId);
 
@@ -25,6 +31,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
   };
 
   const handleEnd = () => {
+    setCurrentTime(0);
     navigation.goBack();
   };
 
@@ -48,9 +55,7 @@ const PlayerScreen = ({route}: PlayerScreenProps) => {
         <Text className="text-xl text-#cccccc">{album.channelTitle}</Text>
         <BookMark album={album} />
         <View className="py-10">
-          <Text>{`${Math.floor(currentTime / 60)}:${Math.floor(
-            currentTime % 60,
-          )}`}</Text>
+          <Text>{formatTime(currentTime)}</Text>
         </View>
         <Button title={isPlaying ? 'Pause' : 'Play'} onPress={handlePlay} />
         <YouTubePlayer
