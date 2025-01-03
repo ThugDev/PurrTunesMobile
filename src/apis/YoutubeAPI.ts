@@ -17,11 +17,8 @@ export const fetchPopularAlbums = async (): Promise<AlbumType[]> => {
     videoCategoryId: '10', // 음악 카테고리 ID
     maxResults: '8',
   });
-
   const response = await axios.get(`${Config.YOUTUBE_URI}videos?${params}`);
-
   const {items = []}: YouTubeSearchResponse = response.data;
-
   return items.map(item => ({
     id: item.id,
     title: decodeURIComponent(item.snippet.title),
@@ -51,7 +48,6 @@ export const fetchSuggestion = async (searchString: string) => {
         maxResults: '8',
       },
     });
-
     const data: YouTubeSearchResponse = response.data;
     return data.items.map(item => item.snippet.title);
   } catch {
@@ -72,7 +68,6 @@ export const fetchSearchResult = async (
   if (!query) {
     return [];
   }
-
   try {
     const response = await axios.get(`${Config.YOUTUBE_URI}search`, {
       params: {
@@ -84,9 +79,7 @@ export const fetchSearchResult = async (
         maxResults: '20',
       },
     });
-
     const {items = []}: YouTubeSearchResponse = response.data;
-
     return items.map(item => ({
       id: item.id,
       title: decodeURIComponent(item.snippet.title),
@@ -96,7 +89,6 @@ export const fetchSearchResult = async (
       publishedAt: item.snippet.publishedAt,
     }));
   } catch (error) {
-    console.error('Error fetching search results:', error);
     throw new Error(
       `검색 결과 가져오기 오류: ${
         error instanceof Error ? error.message : '알 수 없는 오류'
