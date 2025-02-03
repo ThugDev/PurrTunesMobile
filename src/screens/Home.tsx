@@ -2,7 +2,6 @@ import React from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {AlbumType} from '../apis/type';
 import {useNavigation} from '@react-navigation/native';
-import {HomeNavigationProps} from './type';
 import AlbumSearch from '../components/AlbumSearch';
 import PopularList from '../components/PopularList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,6 +10,7 @@ import {ErrorScreen} from '../components/common/ErrorScreen';
 import {SavedAlbumType} from '../components/type';
 import useAlbums from '../hooks/useAlbums';
 import ListScreen from '../components/ListScreen';
+import {HomeNavigationProps} from './type';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
@@ -51,10 +51,10 @@ const Home = () => {
         />
       </View>
       <PopularList albums={popularAlbums} handlePress={handlePress} />
-      <View className="w-full flex justify-center items-center">
+      <View className="w-full flex-center">
         <TouchableOpacity
           onPress={onLogout}
-          className="mb-10 border p-2 rounded bg-gray-400">
+          className="w-1/5 mb-10 border p-2 rounded bg-gray-400">
           <Text className="text-md font-bold">로그아웃</Text>
         </TouchableOpacity>
       </View>

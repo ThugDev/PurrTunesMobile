@@ -12,6 +12,7 @@ import {AlertProvider} from './src/components/common/AlertProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from './src/components/common/LoadingScreen';
 import {SavedAlbumType} from './src/components/type';
+import Layout from './src/components/layout/layout';
 
 export type RootStackParmList = {
   SignInScreen: undefined;
@@ -48,15 +49,17 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AlertProvider>
         <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName={isAuthenticated ? 'Home' : 'SignInScreen'}
-            screenOptions={{headerShown: false}}>
-            <Stack.Screen name="SignInScreen" component={SignInScreen} />
-            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
-            <Stack.Screen name="SearchScreen" component={SearchScreen} />
-          </Stack.Navigator>
+          <Layout>
+            <Stack.Navigator
+              initialRouteName={isAuthenticated ? 'Home' : 'SignInScreen'}
+              screenOptions={{headerShown: false}}>
+              <Stack.Screen name="SignInScreen" component={SignInScreen} />
+              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
+              <Stack.Screen name="SearchScreen" component={SearchScreen} />
+            </Stack.Navigator>
+          </Layout>
         </NavigationContainer>
       </AlertProvider>
     </QueryClientProvider>
