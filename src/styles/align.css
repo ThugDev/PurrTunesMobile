@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Flex Center - 가로/세로 중앙 정렬 */
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  /* Flex Horizontal Center - 수평 중앙 정렬 */
+  .flex-horizontal-center {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  /* Flex Vertical Center - 수직 중앙 정렬 */
+  .flex-vertical-center {
+    @apply flex flex-row justify-center items-center;
+  }
+
+  /* Position Center - 절대 위치로 가로/세로 중앙 정렬 */
+  .position-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Position Horizontal Center - 수평 중앙 정렬 */
+  .position-horizontal-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Position Vertical Center - 수직 중앙 정렬 */
+  .position-vertical-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
