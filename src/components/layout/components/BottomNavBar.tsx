@@ -1,16 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
-import {
-  HomeIcon,
-  SearchIcon,
-  HeartIcon,
-  UserIcon,
-  ListIcon,
-} from 'lucide-react-native';
+
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParmList} from '../../../../App';
+import {Heart, Home, List, Search, User} from 'lucide-react-native';
 
 const BottomNavBar = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParmList>>();
@@ -44,30 +39,25 @@ const BottomNavBar = () => {
   };
 
   return (
-    <View className="flex-row justify-around items-center bg-white py-3 border-t border-gray-200">
+    <View className="flex-row justify-around items-center bg-white py-4 mb-3 border-t border-gray-200">
       <TouchableOpacity onPress={handleSearchPress} className="items-center">
-        <SearchIcon size={24} color="gray" />
-        <Text className="text-xs text-gray-600 mt-1">검색</Text>
+        <Search size={24} color="gray" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleMusicListPress} className="items-center">
-        <ListIcon size={24} color="gray" />
-        <Text className="text-xs text-gray-600 mt-1">노래</Text>
+        <List size={24} color="gray" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleHomePress} className="items-center">
-        <HomeIcon size={24} color="gray" />
-        <Text className="text-xs text-gray-600 mt-1">홈</Text>
+        <Home size={24} color="gray" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleFavoritesPress} className="items-center">
-        <HeartIcon size={24} color="gray" />
-        <Text className="text-xs text-gray-600 mt-1">즐겨찾기</Text>
+        <Heart size={24} color="gray" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleProfilePress} className="items-center">
-        <UserIcon size={24} color="gray" />
-        <Text className="text-xs text-gray-600 mt-1">프로필</Text>
+        <User size={24} color="gray" />
       </TouchableOpacity>
     </View>
   );

@@ -11,6 +11,7 @@ import {SavedAlbumType} from '../components/type';
 import useAlbums from '../hooks/useAlbums';
 import ListScreen from '../components/ListScreen';
 import {HomeNavigationProps} from './type';
+import {Search} from 'lucide-react-native';
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
