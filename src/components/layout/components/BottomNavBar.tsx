@@ -45,11 +45,6 @@ const BottomNavBar = () => {
 
   return (
     <View className="flex-row justify-around items-center bg-white py-3 border-t border-gray-200">
-      <TouchableOpacity onPress={handleHomePress} className="items-center">
-        <HomeIcon size={24} color="gray" />
-        <Text className="text-xs text-gray-600 mt-1">홈</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity onPress={handleSearchPress} className="items-center">
         <SearchIcon size={24} color="gray" />
         <Text className="text-xs text-gray-600 mt-1">검색</Text>
@@ -58,6 +53,11 @@ const BottomNavBar = () => {
       <TouchableOpacity onPress={handleMusicListPress} className="items-center">
         <ListIcon size={24} color="gray" />
         <Text className="text-xs text-gray-600 mt-1">노래</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleHomePress} className="items-center">
+        <HomeIcon size={24} color="gray" />
+        <Text className="text-xs text-gray-600 mt-1">홈</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleFavoritesPress} className="items-center">
